@@ -27,11 +27,22 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
     </div>
 
     <div id="mid">
+
+        <form action="zespol.php" id="projekt" method="post">
+            <input type="text" name="id" placeholder="Id projektu">
+            <input type="text" name="login" placeholder="Login użytkownia">
+            <input type="submit" value="Dodaj użytkownika do zespołu projektu">
+        </form>
+
         <?php
+            if (isset($_POST['id']) && isset($_POST['login'])) {
                 $host = "localhost";
                 $dbuser = "root";
                 $dbpass = "";
                 $database = "projekt";
+
+                $id=$_POST["id"];
+                $login=$_POST["login"];
 
                 $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
 
@@ -39,23 +50,12 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                     die("błąd połączenia" . mysqli_connect_errno());
                 }
 
-                $login=$_POST["login"];
+                $sql = "INSERT INTO usersproject (project_id, user_login) VALUES ('$id', '$login')";
 
-                $sql = "SELECT * FROM users WHERE login='$login'";
-
-                $result = mysqli_query($conn, $sql);
-
-                if (mysqli_num_rows($result)>0) {
-                    while($row=mysqli_fetch_assoc($result)){
-                        $upr=$row['upr'];
-                        echo "<form action='edycjausere.php' method='post'>
-                        <input type='hidden' name='loginog' placeholder='Nazwa projektu' value='$login'>
-                        <input type='text' name='upr' placeholder='Opis projektu' value='$upr'>
-                        <input type='submit' value='EDYTUJ'>
-                        </form>";
-                    }
-                }
-                
+                mysqli_query($conn, $sql);
+            }else{
+                echo "";
+            }
         ?>
     </div>
 

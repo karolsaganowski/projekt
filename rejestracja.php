@@ -9,6 +9,18 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejestracja</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #mid{
+            grid-area: mid;
+            background-color: #EE92C2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,6 +67,7 @@ session_start();
 
         if (mysqli_query($conn, $sql) === TRUE) {
             echo "dodano użytkownika";
+            header('Location: ./logowanie.php');
         } else {
             echo "błąd nwm";
         }

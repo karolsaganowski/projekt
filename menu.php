@@ -9,6 +9,14 @@ if($_SESSION['upr'] == "admin"){
 ?>
 
 <?php
+if($_SESSION['upr'] == "worker"){
+    echo "<a href='./worker.php'>STRONA PRACOWNIKA</a>";
+}else{
+    echo "";
+}
+?>
+
+<?php
 if(!$_SESSION["zalogowano"]){
     echo "<div style='float:right; padding-left:25px;'><a href='./rejestracja.php'>REJESTRACJA</a></div>";
     echo "<div style='float:right;'><a href='./logowanie.php'>ZALOGUJ</a></div>";

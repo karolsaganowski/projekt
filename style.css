@@ -55,6 +55,7 @@ a{
     align-items: center;
     justify-content: center;
     margin: 5px ;
+    border-radius: 15px;
 }
 
 #loginform{

@@ -36,7 +36,6 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                 $database = "projekt";
 
                 $loginog = $_POST["loginog"];
-                $login = $_POST["login"];
                 $upr = $_POST["upr"];
 
                 $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
@@ -45,7 +44,7 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                     die("błąd połączenia" . mysqli_connect_errno());
                 }
 
-                $sql = "UPDATE users SET login = '$login', upr = '$upr' WHERE login = '$loginog'";
+                $sql = "UPDATE users SET upr = '$upr' WHERE login = '$loginog'";
 
                 mysqli_query($conn, $sql);
 

@@ -45,9 +45,6 @@ if($_SESSION['upr'] != "admin"){
         <form action="edycja.php" method="post">
             <input type="submit" value="Edytowanie Projektów">
         </form>
-        <form action="edycjaupr.php" method="post">
-            <input type="submit" value="Edytowanie Użytkowników">
-        </form>
         <form action="zespol.php" method="post">
             <input type="submit" value="Dodaj użytkownika do zespołu">
         </form>
