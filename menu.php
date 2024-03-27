@@ -1,4 +1,5 @@
 <a href='./'>STRONA GŁÓWNA</a>
+<a href='./projekty.php'>PROJEKTY</a>
 <?php
 if($_SESSION['upr'] == "admin"){
     echo "<a href='./admin.php'>STRONA ADMINA</a>";

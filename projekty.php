@@ -1,16 +1,6 @@
 <?php
 session_start();
 ?>
-
-<?php
-    if(isset($_SESSION['zalogowano'])){
-
-    }else{
-        $_SESSION['zalogowano'] = false;
-        $_SESSION['user'] = "";
-        $_SESSION['upr'] = "";
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,15 +27,13 @@ session_start();
             $dbpass = "";
             $database = "projekt";
 
-            $login = $_SESSION['user'];
-
             $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
 
             if (!$conn) {
                 die("błąd połączenia" . mysqli_connect_errno());
             }
 
-            $sql = "SELECT * FROM projects, users, usersproject WHERE usersproject.project_id=projects.id AND usersproject.user_login=users.login AND users.login = '$login'";
+            $sql = "SELECT * FROM projects WHERE 1";
 
             $result = mysqli_query($conn, $sql);
 
@@ -54,23 +42,6 @@ session_start();
                     echo "<div id='projekt'>";
                     echo "Nazwa projektu: ".$row["nazwa"]."<br>";
                     echo "Opis projektu: ".$row["opis"]."<br>";
-                    echo "Zespół projektu: ";
-                    $id=$row['project_id'];
-                    $sql2 = "SELECT * FROM usersproject WHERE project_id=$id";
-
-                    $result2 = mysqli_query($conn, $sql2);
-                        if (mysqli_num_rows($result2)>0) {
-                            $i=0;
-                            while($row2=mysqli_fetch_assoc($result2)){
-                                $i=$i+1;
-                                if(mysqli_num_rows($result2)>$i){
-                                    echo $row2["user_login"].", ";
-                                }else{
-                                    echo $row2["user_login"];
-                                }
-                            }
-                        }
-                    echo "<br>";
                     echo "Kontakt: ".$row["kontakt"]."<br>";
                     echo "</div>";
                 }
