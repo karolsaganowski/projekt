@@ -27,35 +27,50 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
     </div>
 
     <div id="mid">
-
-        <form action="zespol.php" id="projekt" method="post">
-            <input type="text" name="id" placeholder="Id projektu">
-            <input type="text" name="login" placeholder="Login użytkownia">
-            <input type="submit" value="Dodaj użytkownika do zespołu projektu">
-        </form>
-
         <?php
-            if (isset($_POST['id']) && isset($_POST['login'])) {
                 $host = "localhost";
                 $dbuser = "root";
                 $dbpass = "";
                 $database = "projekt";
 
-                $id=$_POST["id"];
-                $login=$_POST["login"];
-
+                
                 $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
-
+                
                 if (!$conn) {
                     die("błąd połączenia" . mysqli_connect_errno());
                 }
-
-                $sql = "INSERT INTO usersproject (project_id, user_login) VALUES ('$id', '$login')";
-
-                mysqli_query($conn, $sql);
-            }else{
-                echo "";
-            }
+                
+                $sql = "SELECT * FROM userjoin, users, projects WHERE users.login=userjoin.user_login AND projects.id=userjoin.project_id";
+                
+                
+                $result = mysqli_query($conn, $sql);    
+                
+                if(mysqli_num_rows($result)>0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        $id=$row["project_id"];
+                        $login=$row["user_login"];
+                        $ujid=$row["ujid"];
+                        echo "<div id='projekt'>";
+                        echo "Nazwa projektu: ".$row["nazwa"];
+                        echo "<br>";
+                        echo "User: ".$row["user_login"];
+                        echo "<form action='yes.php' method='post'>";
+                        echo "<input type='hidden' name='id' value='".$id."'>";
+                        echo "<input type='hidden' name='login' value='".$login."'>";
+                        echo "<input type='hidden' name='ujid' value='".$ujid."'>";
+                        echo "<input type='submit' value='Zatwierdź'>";
+                        echo "</form>";
+                        echo "<form action='no.php' method='post'>";
+                        echo "<input type='hidden' name='id' value='".$id."'>";
+                        echo "<input type='hidden' name='login' value='".$login."'>";
+                        echo "<input type='hidden' name='ujid' value='".$ujid."'>";
+                        echo "<input type='submit' value='Odrzuć'>";
+                        echo "</form>";
+                        echo "</div>";
+                    }
+                }else{
+                    echo "";
+                }
         ?>
     </div>
 

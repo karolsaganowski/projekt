@@ -3,7 +3,7 @@ session_start()
 ?>
 
 <?php
-if($_SESSION['upr'] != "admin"){
+if($_SESSION['upr'] != "admin" && $_SESSION['upr'] != "worker"){
     header('Location: ./index.php');
 }
 ?>

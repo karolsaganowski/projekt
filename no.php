@@ -33,26 +33,17 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                 $dbpass = "";
                 $database = "projekt";
 
+                $ujid=$_POST['ujid'];
+                
                 $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
-
+                
                 if (!$conn) {
                     die("błąd połączenia" . mysqli_connect_errno());
                 }
-
-                $sql = "SELECT * FROM users WHERE 1";
-
-                $result = mysqli_query($conn, $sql);
-
-                if (mysqli_num_rows($result)>0) {
-                    while($row=mysqli_fetch_assoc($result)){
-                        $login=$row['login'];
-                        echo "<form action='edycjauser.php' method='post' id='projekt'>";
-                        echo "Login: ".$row["login"].", Uprawnienia: ".$row["upr"];
-                        echo "<input type='hidden' name='login' value='$login'>";
-                        echo "<input type='submit' value='EDYTUJ'>";
-                        echo "</form>";
-                    }
-                }
+                
+                $sqldelete = "DELETE FROM userjoin WHERE ujid = $ujid";
+                
+                mysqli_query($conn, $sqldelete);    
         ?>
     </div>
 

@@ -43,6 +43,10 @@ session_start();
                     echo "Nazwa projektu: ".$row["nazwa"]."<br>";
                     echo "Opis projektu: ".$row["opis"]."<br>";
                     echo "Kontakt: ".$row["kontakt"]."<br>";
+                    echo "<form action='join.php' method='post'>";
+                    echo "<input type='hidden' name='project' value='".$row["id"]."'>";
+                    echo "<input type='submit' value='Dołącz'>";
+                    echo "</form>";
                     echo "</div>";
                 }
             } else {
@@ -54,7 +58,7 @@ session_start();
     </div>
 
     <div id="bot">
-
+            
     </div>
 </body>
 </html>

@@ -74,8 +74,10 @@ session_start();
                     echo "Kontakt: ".$row["kontakt"]."<br>";
                     echo "</div>";
                 }
-            } else {
+            }else if($_SESSION['upr']!=""){
                 echo "<h1>Nie bierzesz udziału w żadnych projektach.</h1>";
+            }else{
+                echo "<h1>Zaloguj się aby zobaczyć projekty w których bierzesz udział.</h1>";
             }
 
             mysqli_close($conn);

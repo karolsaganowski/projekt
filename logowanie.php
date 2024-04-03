@@ -35,11 +35,13 @@ session_start();
     </div>
 
     <div id="mid">
+        <h1>ZALOGUJ SIĘ</h1>
             <form action="" method="POST" id="loginform">
                 <input type="text" name='login' placeholder="LOGIN">
                 <input type="password" name='password' placeholder="HASŁO">
                 <input type="submit" value="ZALOGUJ SIĘ">
             </form>
+        <h3>Nie masz konta?<a href="./rejestracja.php">Zarejestruj się!</a> </h3>
     <?php
     if (isset($_POST['login']) && isset($_POST['password'])) {
 

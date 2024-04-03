@@ -35,6 +35,7 @@ session_start();
     </div>
 
     <div id="mid">
+        <h1>ZAREJESTRUJ SIĘ</h1>
     <form action="" method="POST" id="loginform">
         <input type="text" name='login' placeholder="LOGIN">
         <input type="password" name='password' placeholder="HASŁO">

@@ -14,6 +14,18 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #mid{
+            grid-area: mid;
+            background-color: #EE92C2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            flex-wrap: wrap;
+        }
+    </style>
 </head>
 <body>
 <div id="top1">
@@ -27,16 +39,15 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
     </div>
 
     <div id="mid">
-
         <?php
-            if(isset($_POST["login"]) && isset($_POST["upr"])){
+            //if(isset($_POST["id"]) && $_SESSION['user']!=""){
                 $host = "localhost";
                 $dbuser = "root";
                 $dbpass = "";
                 $database = "projekt";
 
-                $loginog = $_POST["loginog"];
-                $upr = $_POST["upr"];
+                $project = $_POST["project"];
+                $user = $_SESSION['user'];
 
                 $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
 
@@ -44,13 +55,18 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                     die("błąd połączenia" . mysqli_connect_errno());
                 }
 
-                $sql = "UPDATE users SET upr = '$upr' WHERE login = '$loginog'";
+                $sql = "INSERT INTO `userjoin` (`project_id`, `user_login`) VALUES ('$project', '$user');";
 
                 mysqli_query($conn, $sql);
 
-                echo "Edytowano";
-                echo "<script>setTimeout(() => {location.href = './admin.php'}, '2000');</script>";
-            }
+                echo "Pracownicy rozwarzą twoją prośbę o dołączenie do zespołu";
+                
+                mysqli_close($conn);
+                
+                echo "<script>setTimeout(() => {location.href = './index.php'}, '2000');</script>";
+            //}else{
+            //    echo "";
+            //}
         ?>
     </div>
 

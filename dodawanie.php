@@ -65,7 +65,7 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
 
                 $sql = "INSERT INTO `projects` (`nazwa`, `opis`, `kontakt`) VALUES ('$nazwa', '$opis', '$kontakt');";
 
-                $result = mysqli_query($conn, $sql);
+                mysqli_query($conn, $sql);
 
                 mysqli_close($conn);
             }else{
