@@ -42,7 +42,7 @@ if($_SESSION['upr'] != "admin"){
         <form action="dodawanie.php" method="post">
             <input type="submit" value="Dodawanie Projektów">
         </form>
-        <form action="edycja.php" method="post">
+        <form action="edycjaproj.php" method="post">
             <input type="submit" value="Edytowanie Projektów">
         </form>
         <form action="edycjauser.php" method="post">

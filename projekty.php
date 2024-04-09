@@ -13,30 +13,37 @@ session_start();
     <div id="top1">
         <img src="logo.png" alt="logo" id="logo">
     </div>
-
+    
     <div id="top2">
         <?php
             include "menu.php";
-        ?>
+            ?>
     </div>
-
+    
     <div id="mid">
-        <?php
-            $host = "localhost";
+            <form action="projekty.php" method="post" id="searchform">
+                <input type="search" name="search" id="search">
+                <input type="submit" value="Szukaj">
+            </form>
+            <?php
+            if(isset($_POST["search"])){
+                $host = "localhost";
             $dbuser = "root";
             $dbpass = "";
             $database = "projekt";
+            
+            $search = $_POST["search"];
 
             $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
 
             if (!$conn) {
                 die("błąd połączenia" . mysqli_connect_errno());
             }
-
-            $sql = "SELECT * FROM projects WHERE 1";
-
+            
+            $sql = "SELECT * FROM projects WHERE nazwa LIKE '%".$search."%'";
+            
             $result = mysqli_query($conn, $sql);
-
+            
             if (mysqli_num_rows($result)>0) {
                 while($row=mysqli_fetch_assoc($result)){
                     echo "<div id='projekt'>";
@@ -44,21 +51,63 @@ session_start();
                     echo "Opis projektu: ".$row["opis"]."<br>";
                     echo "Kontakt: ".$row["kontakt"]."<br>";
                     echo "<form action='join.php' method='post'>";
-                    echo "<input type='hidden' name='project' value='".$row["id"]."'>";
-                    echo "<input type='submit' value='Dołącz'>";
+                    echo "<input type='hidden' name='project' value='".$row["id"]."'>"."<br>";
+                    if($_SESSION['zalogowano']==true){
+                        echo "<input type='submit' value='Dołącz'>";
+                    }else{
+                        echo "Zaloguj się aby dołączyć";
+                    }
                     echo "</form>";
                     echo "</div>";
                 }
             } else {
-                echo "<h1>Nie bierzesz udziału w żadnych projektach.</h1>";
+                echo "<h1>Brak wyników</h1>";
             }
-
-            mysqli_close($conn);
-        ?>
-    </div>
-
-    <div id="bot">
             
+            mysqli_close($conn);
+            }else{
+            $host = "localhost";
+            $dbuser = "root";
+            $dbpass = "";
+            $database = "projekt";
+            
+            $conn = mysqli_connect($host, $dbuser, $dbpass, $database);
+            
+            if (!$conn) {
+                die("błąd połączenia" . mysqli_connect_errno());
+            }
+            
+            $sql = "SELECT * FROM projects WHERE 1";
+            
+            $result = mysqli_query($conn, $sql);
+            
+            if (mysqli_num_rows($result)>0) {
+                while($row=mysqli_fetch_assoc($result)){
+                    echo "<div id='projekt'>";
+                    echo "Nazwa projektu: ".$row["nazwa"]."<br>";
+                    echo "Opis projektu: ".$row["opis"]."<br>";
+                    echo "Kontakt: ".$row["kontakt"]."<br>";
+                    echo "<form action='join.php' method='post'>";
+                    echo "<input type='hidden' name='project' value='".$row["id"]."'>"."<br>";
+                    if($_SESSION['zalogowano']==true){
+                        echo "<input type='submit' value='Dołącz'>";
+                    }else{
+                        echo "Zaloguj się aby dołączyć";
+                    }
+                    echo "</form>";
+                    echo "</div>";
+                }
+            } else {
+                echo "<h1>Brak projektów</h1>";
+            }
+            
+            mysqli_close($conn);
+            }
+            ?>
+    </div>
+    
+    <div id="bot">
+        
     </div>
 </body>
 </html>

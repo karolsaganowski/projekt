@@ -28,7 +28,7 @@ session_start();
             $_SESSION['user'] = "";
             $_SESSION['upr'] = "";
             echo "Wylogowano";
-            echo "<script>setTimeout(() => {location.href = './index.php'}, '2000');</script>";
+            echo "<script>setTimeout(() => {location.href = './index.php'}, '1000');</script>";
         ?>
     </div>
 
