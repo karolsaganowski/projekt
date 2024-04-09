@@ -8,6 +8,24 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System zarządzania projektami szkolnymi</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body{
+            margin: 0;
+            display: grid;
+            grid-template-columns: 25% 75%;
+            grid-template-rows: 15vh 3vh 72vh 10vh;
+            grid-template-areas: 
+            "top1 top2"
+            "mid2 mid2"
+            "mid mid"
+            "bot bot";
+        }
+
+        #mid2{
+            grid-area: mid2;
+            background-color: #EE92C2;
+        }   
+    </style>
 </head>
 <body>
     <div id="top1">
@@ -19,12 +37,15 @@ session_start();
             include "menu.php";
             ?>
     </div>
+
+    <div id='mid2'>
+        <form action="projekty.php" method="post" id="searchform">
+            <input type="search" name="search" id="search">
+            <input type="submit" value="Szukaj">
+        </form>
+    </div>
     
     <div id="mid">
-            <form action="projekty.php" method="post" id="searchform">
-                <input type="search" name="search" id="search">
-                <input type="submit" value="Szukaj">
-            </form>
             <?php
             if(isset($_POST["search"])){
                 $host = "localhost";
