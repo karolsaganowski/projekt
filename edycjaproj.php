@@ -124,7 +124,7 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                 
                 mysqli_query($conn, $sql);
 
-                header('Location: ./index.php');
+                header('Location: ./admin.php');
             }else{
                 echo "";
             }

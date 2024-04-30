@@ -44,6 +44,8 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                 $sqldelete = "DELETE FROM userjoin WHERE ujid = $ujid";
                 
                 mysqli_query($conn, $sqldelete);    
+
+                header('Location: ./admin.php');
         ?>
     </div>
 

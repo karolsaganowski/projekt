@@ -67,3 +67,7 @@ a{
     align-items: center;
     justify-content: center;
 }
+
+input{
+    margin-bottom: 5px;
+}

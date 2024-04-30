@@ -48,6 +48,8 @@ if($_SESSION['upr'] != "worker" && $_SESSION['upr'] != "admin"){
                 
                 mysqli_query($conn, $sqlimport);    
                 mysqli_query($conn, $sqldelete);    
+
+                header('Location: ./admin.php');
         ?>
     </div>
 
